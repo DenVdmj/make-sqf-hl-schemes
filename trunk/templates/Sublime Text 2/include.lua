@@ -19,7 +19,17 @@ return
         wrapper = '"<<KEYWORD>>"',
         separator = ",",
         padding = true,
+        otherfiles = {
+            "SQF-EventHandlerSnippets.sublime-completions",
+            "SQF-ConfigName.sublime-completions",
+            "SQF-ConfigName.sublime-completions",
+            "for_array.sublime-snippet",
+            "for_array_reverse.sublime-snippet",
+            "for_config.sublime-snippet",
+            "for_range.sublime-snippet",
+            "for_range_reverse.sublime-snippet",
+            "Comments.tmPreferences",
+            "Indent.tmPreferences",
+        }
     },
-
-
 }

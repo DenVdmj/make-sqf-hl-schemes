@@ -268,7 +268,7 @@ function getKeywords(commandsFileNameOrURL, keywordsFileName)
     }
 end
 
-function makeSchemes (templates, rule)
+function makeSchemes(templates, rule)
     for _, template in pairs(templates) do
         print('Make scheme from "'..template.template..'"')
         makeScheme(template, rule)
@@ -286,10 +286,11 @@ local __templatemt = {
         separator = '',
         padding = false,
         lowercase = false,
+        otherfiles = {},
     }
 }
 
-function makeScheme (template, rule)
+function makeScheme(template, rule)
 
     template = setmetatable(template, __templatemt)
 
@@ -344,7 +345,14 @@ function makeScheme (template, rule)
     schemeFileHNDL:write(schemeText)
     schemeFileHNDL:close()
 
+    for _, filename in pairs(template.otherfiles) do
+        -- print(">>>> copy file: " .. template.directory .. '/' .. filename)
+        putFileContents(schemePath..filename, getFileContents(template.directory .. '/' .. filename, true), true)
+    end
+
+
     return true
 end
+
 
 main()

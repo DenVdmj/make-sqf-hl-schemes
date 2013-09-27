@@ -1,0 +1,236 @@
+def=#define
+und=#undef
+inc=#include "|"
+
+switch=switch (|) do {\n\tcase : {\n\t\t%SEL%\n\t};\n};\n
+if=if (|) then {\n\t%SEL%\n};\n
+if=if (|) then {\n\t%SEL%\n} else {\n};\n
+while=while {|} do {\n\t%SEL%\n};\n
+
+for={\n\t\n} foreach |;\n
+for=for "_i" from 0 to count | -1 do {\t\n};\n
+for=for "_i" from count | -1 to 0 step -1 do {\t\n};\n
+for=for "_i" from 0 to count | -1 step 2 do {\t\n};\n
+for=for "_i" from 0 to | do {\t|\n};\n
+
+"CfgV="CfgVehicles
+"CfgW="CfgWeapons
+"CfgWo="CfgWorlds
+"CfgM="CfgMagazines
+"CfgA="CfgAmmo
+"CfgI="CfgIdentities
+
+# ArmA 2: Actions
+"Aut="AutoHover
+"Can="CancelAction
+"Can="CancelLand
+"Can="CancelTakeFlag
+"Dea="Deactivate
+"Dea="DeactivateMine
+"Dia="Diary
+"Dro="DropMagazine
+"Dro="DropWeapon
+"Eje="Eject
+"Eng="EngineOn
+"Eng="EngineOff
+"Fir="FireInFlame
+"Fir="FirePutDown
+"Fla="FlapsUp
+"Fla="FlapsDown
+"Gea="Gear
+"Get="GetInCargo
+"Get="GetInCommander
+"Get="GetInDriver
+"Get="GetInGunner
+"Get="GetInPilot
+"Get="GetInTurret
+"Get="GetOut
+"Han="HandGunOn
+"Han="HandGunOff
+"Hea="Heal
+"Hid="HideBody
+"InG="InGameMenu
+"Lad="LadderDown
+"Lad="LadderUp
+"Lad="LadderOff
+"Lad="LadderOnDown
+"Lad="LadderOnUp
+"Lan="Land
+"Lan="LandGear
+"Lan="LandGearUp
+"Lig="LightOff
+"Lig="LightOn
+"Loa="LoadMagazine
+"Man="ManualFire
+"Man="ManualFireCancel
+"Mar="MarkEntity
+"Mov="MoveToCargo
+"Mov="MoveToCommander
+"Mov="MoveToDriver
+"Mov="MoveToGunner
+"Mov="MoveToPilot
+"Mov="MoveToTurret
+"Non="None
+"NVG="NVGoggles
+"NVG="NVGogglesOff
+"Rea="Rearm
+"Ref="Refuel
+"Rep="Repair
+"Ret="ReturnFlag
+"Rep="RepairVehicle
+"Sal="Salute
+"Scu="ScudCancel
+"Scu="ScudLaunch
+"Scu="ScudStart
+"Set="SetTimer
+"Sit="SitDown
+"Str="StrokeFist
+"Str="StrokeGun
+"Sur="Surrender
+"Swi="SwitchMagazine
+"Swi="SwitchWeapon
+"Tak="TakeFlag
+"Tak="TakeWeapon
+"Tak="TakeMine
+"Tal="Talk
+"Tea="TeamSwitch
+"Tou="TouchOff
+"Tur="TurnOut
+"Use="UseMagazine
+"Use="User
+"Use="UserType
+"Use="UseWeapon
+"Wea="WeaponOnBack
+"Loa="LoadOtherMagazine
+"Loa="LoadEmptyMagazine
+"Put="PutWeapon
+"Put="PutMagazine
+"Sta="StartTimer
+"Hid="HideWeapon
+"Mar="MarkWeapon
+"Han="HandGunOffStand
+"Han="HandGunOnStand
+"Tak="TakeDropMagazine
+"Tak="TakeDropWeapon
+"Add="AddBag
+"Art="ArtilleryComputer
+"Ass="Assemble
+"Aut="AutoHoverCancel
+"Dis="DisAssemble
+"Dro="DropBag
+"Fir="FirstAid
+"Get="GetOver
+"Gun="GunLightOff
+"Gun="GunLightOn
+"Hea="HealSoldier
+"IRL="IRLaserOff
+"IRL="IRLaserOn
+"Ope="OpenBag
+"Put="PutBag
+"Tak="TakeBag
+"Tel="Tell
+
+# ArmA 2: Event Handlers
+"Ani="AnimChanged
+"Ani="AnimDone
+"Ani="AnimStateChanged
+"Dam="Dammaged
+"Eng="Engine
+"Fir="Fired
+"Fir="FiredNear
+"Fue="Fuel
+"Gea="Gear
+"Get="GetIn
+"Get="GetOut
+"Han="HandleDamage
+"Han="HandleHeal
+"Hit="Hit
+"Ini="Init
+"Inc="IncomingMissile
+"Kil="Killed
+"Lan="LandedTouchDown
+"Lan="LandedStopped
+"Res="Respawn
+"Wea="WeaponAssembled
+"Wea="WeaponDisassembled
+"MPH="MPHit
+"MPK="MPKilled
+"MPR="MPRespawn
+
+# User Interface Event Handlers
+"Loa="Load
+"Unl="Unload
+"Chi="ChildDestroyed
+"Mou="MouseEnter
+"Mou="MouseExit
+"Set="SetFocus
+"Kil="KillFocus
+"Tim="Timer
+"Key="KeyDown
+"Key="KeyUp
+"Cha="Char
+"IME="IMEChar
+"IME="IMEComposition
+"Joy="JoystickButton
+"Mou="MouseButtonDown
+"Mou="MouseButtonUp
+"Mou="MouseButtonClick
+"Mou="MouseButtonDblClick
+"Mou="MouseMoving
+"Mou="MouseHolding
+"Mou="MouseZChanged
+"Can="CanDestroy
+"Des="Destroy
+"But="ButtonClick
+"But="ButtonDown
+"But="ButtonUp
+"LBS="LBSelChanged
+"LBL="LBListSelChanged
+"LBD="LBDblClick
+"LBD="LBDrag
+"LBD="LBDragging
+"LBD="LBDrop
+"Tre="TreeSelChanged
+"Tre="TreeLButtonDown
+"Tre="TreeDblClick
+"Tre="TreeExpanded
+"Tre="TreeCollapsed
+"Tre="TreeMouseMove
+"Tre="TreeMouseHold
+"Tre="TreeMouseExit
+"Too="ToolBoxSelChanged
+"Che="CheckBoxesSelChanged
+"HTM="HTMLLink
+"Sli="SliderPosChanged
+"Obj="ObjectMoved
+"Men="MenuSelected
+"Dra="Draw
+"Vid="VideoStopped
+
+
+AnimChanged=addEventHandler [\"AnimChanged\", {\n    _unit = arg(0); // object, event owner\n    _anim = arg(1); // string, anim name, name of the /States anim class\n    |\n}];\n
+AnimDone=addEventHandler [\"AnimDone\", {\n    _unit = arg(0); // object, event owner\n    _anim = arg(1); // string, anim name\n    |\n}];\n
+AnimStateChanged=addEventHandler [\"AnimStateChanged\", {\n    _unit = arg(0); // object, event owner\n    _anim = arg(1); // string, anim name\n    |\n}];\n
+Dammaged=addEventHandler [\"Dammaged\", {\n    _unit      = arg(0); // object, event owner\n    _selection = arg(1); // string, selection name\n    _damage    = arg(2); // number, damage done\n    |\n}];\n
+Engine=addEventHandler [\"Engine\", {\n    _vehicle     = arg(0); // object, event owner\n    _engineState = arg(1); // bool, true/false when the engine is turned on/off\n    |\n}];\n
+Fired=addEventHandler [\"Fired\", {\n    _unit       = arg(0); // object, event owner\n    _weapon     = arg(1); // string, weapon that was used\n    _muzzle     = arg(2); // string, muzzle that was used\n    _mode       = arg(3); // string, fire mode that was used\n    _ammo       = arg(4); // string, ammo that was used\n    _magazine   = arg(5); // string, magazine that was used\n    _projectile = arg(6); // object of ammo class, projectile, namely: bullet, missile, etc.,\n    |\n}];\n
+FiredNear=addEventHandler [\"FiredNear\", {\n    _unit       = arg(0); // object, event owner\n    _firer      = arg(1); // object, object which fires a weapon near the unit\n    _distance   = arg(2); // number, distance in meters between the unit and firer (max. distance ~69m)\n    _weapon     = arg(3); // string, fired weapon\n    _muzzle     = arg(4); // string, muzzle that was used\n    _mode       = arg(5); // string, current mode of the fired weapon\n    _ammo       = arg(6); // string, ammo used\n    |\n}];\n
+Fuel=addEventHandler [\"Fuel\", {\n    _vehicle    = arg(0); // object, event owner\n    _fuelState  = arg(1); // boolean, 0 when no fuel, 1 when the fuel tank is full\n    |\n}];\n
+Gear=addEventHandler [\"Gear\", {\n    _vehicle    = arg(0); // object, event owner\n    _gearState  = arg(1); // boolean, true when the gear is lowered, false when retracted\n    |\n}];\n
+GetIn=addEventHandler [\"GetIn\", {\n    _vehicle    = arg(0); // object, event owner\n    _position   = arg(1); // string, can be either \"driver\", \"gunner\", \"commander\" or \"cargo\"\n    _unit       = arg(2); // object, unit that entered the vehicle\n    |\n}];\n
+GetOut=addEventHandler [\"GetOut\", {\n    _vehicle    = arg(0); // object, event owner\n    _position   = arg(1); // string, can be either \"driver\", \"gunner\", \"commander\" or \"cargo\"\n    _unit       = arg(2); // object, unit that leaved the vehicle\n    |\n}];\n
+HandleDamage=addEventHandler [\"HandleDamage\", {\n    _unit       = arg(0); // object, event owner\n    _selection  = arg(1); // string, name of the selection where the unit was damaged.\n                          //    \"\" for over-all structural damage,\n                          //    \"?\" for unknown selections.\n    _damage     = arg(2); // number, resulting level of damage for the selection.\n    _source     = arg(3); // object, the source unit that caused the damage.\n    _projectile = arg(4); // string, classname of the projectile that caused inflicted the damage. (\"\" for unknown, such as falling damage.)\n    |\n}];\n
+HandleHeal=addEventHandler [\"HandleHeal\", {\n    _unit   = arg(0); // object, event owner\n    _healer = arg(1); // object, person, who acting as a medic\n    _healerCanHeal = arg(2); // boolean, true when healer is corpsman\n    |\n}];\n
+Hit=addEventHandler [\"Hit\", {\n    _unit     = arg(0); // object, event owner\n    _causedBy = arg(1); // object, object that caused the damage.\n                        // contains the unit itself in case of collisions.\n    _damage   = arg(2); // number, level of damage caused by the hit\n    |\n}];\n
+HitPart=addEventHandler [\"HitPart\", {\n    _target     = arg(0); // object, event owner, object that got injured/damaged.\n    _shooter    = arg(1); // object, unit that inflicted the damage. If injured by a vehicle impact or a fall the target itself is returned, or, in case of explosions, the null object. In case of explosives that were planted by someone (e.g. satchel charges), that unit is returned.\n    _bullet     = arg(2); // object, object that was fired.\n    _position   = arg(3); // position3D, position the bullet impacted (ASL).\n    _velocity   = arg(4); // vector3d, speed vector at which bullet impacted.\n    _selection  = arg(5); // array, list of strings with named selection of the object that were hit.\n    _ammo       = arg(6); // array, ammo info: [hit value, indirect hit value, indirect hit range, explosive damage, ammo class name] OR, if there is no shot object: [impulse value on object collided with,0,0,0]\n    _direction  = arg(7); // vector3d, vector that is orthogonal (perpendicular) to the surface struck. For example, if a wall was hit, vector would be pointing out of the wall at a 90 degree angle.\n    _radius     = arg(8); // number, radius (size) of component hit.\n    _surface    = arg(9); // string, surface type struck.\n    _direct     = arg(10); // boolean, true if object was directly hit, false if it was hit by indirect/splash damage.\n    |\n}];\n
+Init=addEventHandler [\"Init\", {\n    _unit     = arg(0); // object, event owner, the created object\n    |\n}];\n
+IncomingMissile=addEventHandler [\"IncomingMissile\", {\n    _unit     = arg(0); // object, object the event handler is assigned to\n    _ammo     = arg(1); // string, ammo type that was fired on the unit\n    _whoFired = arg(2); // object, object that fired the weapon\n    |\n}];\n
+Killed=addEventHandler [\"Killed\", {\n    _unit   = arg(0); // object, event owner\n    _killer = arg(1); // object, object that killed the unit,\n                      // contains the unit itself in case of collisions.\n    |\n}];\n
+LandedTouchDown=addEventHandler [\"LandedTouchDown\", {\n    _plane     = arg(0); // object, event owner\n    _airportID = arg(1); // number, ID of the airport (-1 for anything else).\n    |\n}];\n
+LandedStopped=addEventHandler [\"LandedStopped\", {\n    _plane     = arg(0); // object, event owner\n    _airportID = arg(1); // number, ID of the airport (-1 for anything else).\n    |\n}];\n
+Respawn=addEventHandler [\"Respawn\", {\n    _unit   = arg(0); // object, event owner\n    _corpse = arg(1); // object, object the event handler was assigned to, aka the corpse/unit player was previously controlling.\n    |\n}];\n
+WeaponAssembled=addEventHandler [\"WeaponAssembled\", {\n    _unit   = arg(0); // object, event owner\n    _weapon = arg(1); // object, object of the assembled weapon.\n    |\n}];\n
+WeaponDisassembled=addEventHandler [\"WeaponDisassembled\", {\n    _unit       = arg(0); // object, event owner\n    _primaryBag  = arg(1); // object, first backpack object which was weapon dissasembled into...\n    _secondaryBag = arg(2); // object, second backpack object which was weapon dissasembled into...\n    |\n}];\n
+MPHit=addEventHandler [\"MPHit\", {\n    _unit     = arg(0); // object, event owner\n    _causedBy = arg(1); // object, object that caused the damage. Contains the\n                        // unit itself in case of collisions.\n    _damage   = arg(2); // number, Level of damage caused by the hit\n    |\n}];\n
+MPKilled=addEventHandler [\"MPKilled\", {\n    _unit   = arg(0); // object, event owner\n    _killer = arg(1); // object, object that killed the unit. Contains the\n                      // unit itself in case of collisions.\n    |\n}];\n
+MPRespawn=addEventHandler [\"MPRespawn\", {\n    _unit   = arg(0); // object, event owner\n    _corpse = arg(1); // object, object the event handler was assigned to,\n                      // aka the corpse/unit player was previously controlling.\n    |\n}];\n

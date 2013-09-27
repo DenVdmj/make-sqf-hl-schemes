@@ -113,23 +113,16 @@
 <span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">keywords</span> = <span class="lua-value"># &lt;&lt;&lt; KEYWORDS INSERT HERE &gt;&gt;&gt;</span>
 <span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">commands</span> = <span class="lua-value"># &lt;&lt;&lt; COMMANDS INSERT HERE &gt;&gt;&gt;</span>
 <span class="indent">&mdash;&mdash;&mdash;</span>},
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">separator</span> = <span class="lua-value"> </span>
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">template</span> = <span class="lua-value">sqf.api</span>
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">directory</span> = <span class="lua-value">./templates/SciTE</span>
+<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">separator</span> = <span class="lua-value"> </span>
+<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">template</span> = <span class="lua-value">sqf.properties</span>
+<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">table</span> <span class="lua-varname">otherfiles</span> = {
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">1</span> = <span class="lua-value">sqf.api</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">2</span> = <span class="lua-value">sqf.abbrev</span>
+<span class="indent">&mdash;&mdash;&mdash;</span>},
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">wrapper</span> = <span class="lua-value">&lt;&lt;KEYWORD&gt;&gt;</span>
 <span class="indent"></span>},
 <span class="indent"></span><span class="lua-type">table</span> <span class="lua-varname">11</span> = {
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">boolean</span> <span class="lua-varname">padding</span> = <span class="lua-value">false</span>
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">table</span> <span class="lua-varname">placeholder</span> = {
-<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">keywords</span> = <span class="lua-value"># &lt;&lt;&lt; KEYWORDS INSERT HERE &gt;&gt;&gt;</span>
-<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">commands</span> = <span class="lua-value"># &lt;&lt;&lt; COMMANDS INSERT HERE &gt;&gt;&gt;</span>
-<span class="indent">&mdash;&mdash;&mdash;</span>},
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">separator</span> = <span class="lua-value"> </span>
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">template</span> = <span class="lua-value">sqf.properties</span>
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">directory</span> = <span class="lua-value">./templates/SciTE</span>
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">wrapper</span> = <span class="lua-value">&lt;&lt;KEYWORD&gt;&gt;</span>
-<span class="indent"></span>},
-<span class="indent"></span><span class="lua-type">table</span> <span class="lua-varname">12</span> = {
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">boolean</span> <span class="lua-varname">padding</span> = <span class="lua-value">false</span>
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">table</span> <span class="lua-varname">placeholder</span> = {
 <span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">keywords</span> = <span class="lua-value">&lt;!-- keywords insert here --&gt;</span>
@@ -140,15 +133,27 @@
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">directory</span> = <span class="lua-value">./templates/Sublime Text 2</span>
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">wrapper</span> = <span class="lua-value">&lt;&lt;KEYWORD&gt;&gt;</span>
 <span class="indent"></span>},
-<span class="indent"></span><span class="lua-type">table</span> <span class="lua-varname">13</span> = {
+<span class="indent"></span><span class="lua-type">table</span> <span class="lua-varname">12</span> = {
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">boolean</span> <span class="lua-varname">padding</span> = <span class="lua-value">true</span>
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">table</span> <span class="lua-varname">placeholder</span> = {
 <span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">keywords</span> = <span class="lua-value">/* keywords insert here */</span>
 <span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">commands</span> = <span class="lua-value">/* commands insert here */</span>
 <span class="indent">&mdash;&mdash;&mdash;</span>},
+<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">directory</span> = <span class="lua-value">./templates/Sublime Text 2</span>
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">separator</span> = <span class="lua-value">,</span>
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">template</span> = <span class="lua-value">SQF.sublime-completions</span>
-<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">directory</span> = <span class="lua-value">./templates/Sublime Text 2</span>
+<span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">table</span> <span class="lua-varname">otherfiles</span> = {
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">1</span> = <span class="lua-value">SQF-EventHandlerSnippets.sublime-completions</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">2</span> = <span class="lua-value">SQF-ConfigName.sublime-completions</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">3</span> = <span class="lua-value">SQF-ConfigName.sublime-completions</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">4</span> = <span class="lua-value">for_array.sublime-snippet</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">5</span> = <span class="lua-value">for_array_reverse.sublime-snippet</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">6</span> = <span class="lua-value">for_config.sublime-snippet</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">7</span> = <span class="lua-value">for_range.sublime-snippet</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">8</span> = <span class="lua-value">for_range_reverse.sublime-snippet</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">9</span> = <span class="lua-value">Comments.tmPreferences</span>
+<span class="indent">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">10</span> = <span class="lua-value">Indent.tmPreferences</span>
+<span class="indent">&mdash;&mdash;&mdash;</span>},
 <span class="indent">&mdash;&mdash;&mdash;</span><span class="lua-type">string</span> <span class="lua-varname">wrapper</span> = <span class="lua-value">&quot;&lt;&lt;KEYWORD&gt;&gt;&quot;</span>
 <span class="indent"></span>},
 </pre></body></html>1
