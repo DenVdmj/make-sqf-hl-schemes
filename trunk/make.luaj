@@ -1,0 +1,350 @@
+------------------------------------------------------------------------
+--                                                                    --
+--                                                                    --
+--                                                                    --
+--                                                                    --
+--                                                                    --
+------------------------------------------------------------------------
+
+local io = require("io")
+local lfs = require("lfs")
+local http = require("socket.http")
+local ltn12 = require("ltn12")
+
+require('3p/dump')
+
+function main()
+
+    local rule = getKeywords(
+        --'http://community.bistudio.com/wiki/Category:Scripting_Commands_ArmA2',
+        'http://community.bistudio.com/wiki/Category:Scripting_Commands_Arma_3',
+        --'cache/http_community.bistudio.com_wiki_Category_Scripting_Commands_ArmA2',
+        'templates/keywords.txt'
+    )
+
+    -- buildScheme(rule)
+
+    local templates = getTemplates()
+    print( "Total templates: "..#templates )
+
+    ---------------------------------------------
+    local file = io.open('dump.templates.html', 'w+')
+    file:write(dumpAsHTML(templates, 'm3', '/head /black'))
+    file:close()
+    ---------------------------------------------
+    local file = io.open('dump.rule.html', 'w+')
+    file:write(dumpAsHTML(rule, 'm3', '/head /black'))
+    file:close()
+    ---------------------------------------------
+
+    if #templates < 1 then
+        return
+    end
+
+    makeSchemes(templates, rule)
+
+
+end
+
+-------------------------------------------------------------------------------
+function getBrowserHeaders()
+    return {
+        ["User-Agent"] = "Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.10.229 Version/11.64",
+        ["Accept"] = "text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/webp, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1",
+        ["Accept-Language"] = "ru-RU,ru;q=0.9,en;q=0.8",
+        ["Accept-Charset"] = "iso-8859-1, utf-8, utf-16, *;q=0.1",
+      --["Accept-Encoding"] = "gzip",
+      --["Pragma"] = "no-cache",
+      --["Cache-Control"] = "no-cache",
+        ["Referer"] = "http://code.google.com/",
+        ["Connection"] = "Keep-Alive",
+    }
+end
+
+function httpGetAsBrowser(url)
+    return httpGet {
+        url = url, method = "GET", headers = getBrowserHeaders()
+    }
+end
+
+function httpGet(request)
+    local buffer = {}
+    request.sink = ltn12.sink.table(buffer)
+    local ok, responseCode, responseHeaders, responseStatus = http.request(request)
+    if responseHeaders["content-encoding"] == "gzip" then
+        -- require gzip module
+    end
+    return {
+        ok = ok,
+        content = table.concat(buffer),
+        code = responseCode,
+        headers = responseHeaders,
+        status = responseStatus
+    }
+end
+
+function getFileContents(filename, binary)
+    local fileHNDL = io.open(filename, "r"..(binary and "b" or ""))
+    if not fileHNDL then return "" end
+    local buffer = fileHNDL:read("*a")
+    fileHNDL:close()
+    return buffer
+end
+
+function putFileContents(filename, contents, binary)
+    local fileHNDL = io.open(filename, "w"..(binary and "b+" or "+"))
+    if not fileHNDL then return false end
+    fileHNDL:write(contents)
+    fileHNDL:close()
+    return true
+end
+
+function httpCachedGet(url)
+    local cacheFileName = escapeFileName(url)
+    local lastModified = getFileContents('./cache/'..cacheFileName..'.{lm}')
+    local headers = getBrowserHeaders()
+    if (lastModified) then
+        headers["If-Modified-Since"] = lastModified
+    end
+    response = httpGet { url = url, method = "GET", headers = headers }
+    --[[
+        local _response = {
+            ok = response.ok,
+            code = response.code,
+            headers = response.headers,
+            status = response.status
+        }
+        print( dumpAsHTML(_response, 'm3', '/white') )
+    ]]
+    if response.code == 304 then
+        print("response.code == 304")
+        return getFileContents('./cache/'..cacheFileName)
+    end
+    putFileContents('./cache/'..cacheFileName, response.content, "b")
+    putFileContents('./cache/'..cacheFileName..'.{lm}', response.headers["last-modified"], "b")
+    return response.content
+end
+
+function lfs.mkpath(path)
+    local dirpath = ""
+    for dirname in (path):gmatch("([^\\/]+)[\\/]") do
+        dirpath = dirpath..dirname.."/"
+        lfs.mkdir(dirpath)
+    end
+end
+
+function getTemplates()
+    local function getTemplate(filename)
+        local func, err = loadfile(filename)
+        if not func then
+            -- gen error
+            print('Error in incuding module ('..filename..')\n'..err)
+            return nil
+        end
+        local isOk, template = pcall(func)
+        if not isOk then
+            -- gen error
+            print('Error in incuding module '..filename)
+            return nil
+        end
+        return template
+    end
+
+    local templates = {}
+    local location = './templates'
+
+    for dirname in lfs.dir(location) do
+        local dirname = location..'/'..dirname
+        local attr = lfs.attributes(dirname)
+        if attr and attr.mode == 'directory' and dirname ~= "." and dirname ~= ".." then
+            local filename = dirname..'/'..'include.lua'
+            attr = lfs.attributes(filename)
+            if attr and attr.mode == 'file' then
+                print('Load module from "'..dirname..'"')
+                local template = getTemplate(filename)
+                if template then
+                    for schemename, tpl in pairs(template) do
+                        tpl.directory = dirname
+                        print('Load scheme template "'..schemename..'"')
+                        table.insert(templates, tpl)
+                    end
+                end
+            end
+        end
+    end
+    return templates
+end
+
+function canonozeSQFName(name, ...)
+    return name:gsub("^([A-Z][a-z])", function (s) return s:lower() end), ...
+end
+
+function escapeRegExp(regexp)
+    return tostring(regexp:gsub('[%^%$%(%)%%%.%[%]%*%+%-%?]', '%%%1'))
+end
+
+function escapeFileName(filename)
+    return tostring(tostring(filename:gsub('[%:%/%\\%>%<%?%"%\']', '_')):gsub('_+', '_'))
+end
+
+function parseBISWikiCategory(text)
+    local starti, endi, name1, name2, _
+    starti, endi = text:find([[<h3\>\s-#\s-</h3>]])
+    starti, endi = text:find([[<h3>\s-A\s-</h3>]], endi)
+    local pattern = [[<li><a href="/wiki/([a-zA-Z0-9_]+)" title="([a-zA-Z0-9 ]+)">(%2)</a></li>]]
+    local commandsTable = {}
+    local descriptionsTable = {}
+    while true do
+        starti, endi, name1, name2 = text:find(pattern, endi)
+        if not starti then break end
+        if name1:gsub("_", " ", 1) == name2 then
+            local value
+            if name1:find("^diag_") then
+                value = name1
+            else
+                _, _, value = name1:find("^(%w+)")
+            end
+            local key = value:lower()
+            commandsTable[key] = value
+            descriptionsTable[key] = { uri = name1, desc = "" }
+        end
+    end
+    return {
+        commandsTable = commandsTable,
+        descriptionsTable = descriptionsTable
+    }
+end
+
+function getDescription(url)
+    return ""
+end
+
+function getKeywords(commandsFileNameOrURL, keywordsFileName)
+    -- get and build keywords
+    local keywordsText = getFileContents(keywordsFileName or "templates/keywords.txt")
+    local keywordsTable = {}
+    local keywordsList = {}
+
+    if not keywordsText then
+        return nil
+    end
+
+    for keyword in keywordsText:gmatch("([%w%-%+%?%,%;%=%_]+)") do
+        keywordsTable[keyword:lower()] = keyword
+    end
+    for lowerCaseKeyword, keyword in pairs(keywordsTable) do
+        table.insert(keywordsList, canonozeSQFName(keyword))
+    end
+    -- get and build command
+    local commandsText
+    if commandsFileNameOrURL:find("^http://") then
+        commandsText = httpCachedGet(commandsFileNameOrURL)
+    else
+        commandsText = getFileContents(commandsFileNameOrURL)
+    end
+    local parsed = parseBISWikiCategory(commandsText)
+    local commandsList = {}
+    local descriptionsList = {}
+    for lowerCaseCommand, command in pairs(parsed.commandsTable) do
+        if not keywordsTable[lowerCaseCommand] then
+            table.insert(commandsList, canonozeSQFName(command))
+        end
+    end
+    for _, record in pairs(parsed.descriptionsTable) do
+        record.desc = getDescription(record.url)
+    end
+    table.sort(keywordsList)
+    table.sort(commandsList)
+    return {
+        keywords = {
+            table = keywordsTable,
+            list = keywordsList,
+        },
+        commands = {
+            table = parsed.commandsTable,
+            list = commandsList,
+        },
+        descriptions = parsed.descriptionsTable
+    }
+end
+
+function makeSchemes (templates, rule)
+    for _, template in pairs(templates) do
+        print('Make scheme from "'..template.template..'"')
+        makeScheme(template, rule)
+    end
+end
+
+local __templatemt = {
+    __index = {
+        template = '',
+        placeholder = {
+            keywords = '',
+            commands = '',
+        },
+        wrapper = '',
+        separator = '',
+        padding = false,
+        lowercase = false,
+    }
+}
+
+function makeScheme (template, rule)
+
+    template = setmetatable(template, __templatemt)
+
+    local templateFile = template.directory..'/'..template.template
+    local templateText = getFileContents(templateFile)
+    if not templateText then
+        print('Error creating scheme: template file "'..templateFile..'" not found!')
+        return false
+    end
+
+    local schemePath = './schemes/'..template.directory:gsub('.-templates/', '')..'/'
+    lfs.mkpath(schemePath)
+
+    local schemeFileName = schemePath..template.template
+    local schemeFileHNDL = io.open(schemeFileName, 'w+')
+    if not schemeFileHNDL then
+        print('Error creating scheme: can\'t create file "'..schemeFileName..'"')
+        return false
+    end
+
+    local function getWrapList(list)
+        local result = {}
+        local str = ''
+        for _, item in pairs(list) do
+            table.insert(
+                result,
+                tostring(
+                    template.wrapper:
+                        gsub('<<KEYWORD>>', template.lowercase and item:lower() or item):
+                        gsub('<<DESCRIPTION>>', '')
+                )
+            )
+        end
+        return result
+    end
+
+    local paddingRegExp = template.padding and '(\n *)' or ''
+    local schemeText = templateText:
+        gsub(paddingRegExp..escapeRegExp(template.placeholder.commands or '1c3511374f0cbfee5efce28467fb9618'),
+            function (padding)
+                padding = template.padding and padding or ''
+                return padding..table.concat(getWrapList(rule.commands.list), template.separator..padding)
+            end, 1
+        ):
+        gsub(paddingRegExp..escapeRegExp(template.placeholder.keywords or '1c3511374f0cbfee5efce28467fb9618'),
+            function (padding)
+                padding = template.padding and padding or ''
+                return padding..table.concat(getWrapList(rule.keywords.list), template.separator..padding)
+            end, 1
+        )
+
+    schemeFileHNDL:write(schemeText)
+    schemeFileHNDL:close()
+
+    return true
+end
+
+main()

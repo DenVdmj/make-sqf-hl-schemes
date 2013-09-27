@@ -1,0 +1,38 @@
+<NotepadPlus>
+    <UserLang name="SQF" ext="sqf sqs">
+        <Settings>
+            <Global caseIgnored="yes" />
+            <TreatAsSymbol comment="yes" commentLine="yes" />
+            <Prefix words1="no" words2="yes" words3="yes" words4="yes" />
+        </Settings>
+        <KeywordLists>
+            <Keywords name="Delimiters">&quot;00&quot;00</Keywords>
+            <Keywords name="Folder+"> { [ ( </Keywords>
+            <Keywords name="Folder-"> } ] ) </Keywords>
+            <Keywords name="Operators">+ - % ^ = ; &lt; &gt; &amp; | ! ,</Keywords>
+            <Keywords name="Comment">1/* 2*/ 0//</Keywords>
+            <Keywords name="Words1"><commands-insert-here/> <keywords-insert-here/></Keywords>
+            <Keywords name="Words2">_</Keywords>
+            <Keywords name="Words3">#</Keywords>
+            <Keywords name="Words4">argt_ bis_ ~</Keywords>
+        </KeywordLists>
+        <Styles>
+            <WordsStyle name="DEFAULT" styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="FOLDEROPEN" styleID="12" fgColor="FF3535" bgColor="FFFFFF" fontName="Courier New" fontStyle="2" fontSize="11" />
+            <WordsStyle name="FOLDERCLOSE" styleID="13" fgColor="FF3535" bgColor="FFFFFF" fontName="Courier New" fontStyle="2" fontSize="11" />
+            <WordsStyle name="OPERATOR" styleID="10" fgColor="000000" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="KEYWORD1" styleID="5" fgColor="000000" bgColor="FFFFFF" fontName="Courier New" fontStyle="1" fontSize="11" />
+            <WordsStyle name="KEYWORD2" styleID="6" fgColor="000080" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="KEYWORD3" styleID="7" fgColor="800000" bgColor="FFFFFF" fontName="Courier New" fontStyle="1" fontSize="11" />
+            <WordsStyle name="KEYWORD4" styleID="8" fgColor="800080" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="COMMENT" styleID="1" fgColor="808080" bgColor="FFFFFF" fontName="Courier New" fontStyle="2" fontSize="11" />
+            <WordsStyle name="COMMENT LINE" styleID="2" fgColor="808080" bgColor="FFFFFF" fontName="Courier New" fontStyle="2" fontSize="11" />
+            <WordsStyle name="NUMBER" styleID="4" fgColor="008080" bgColor="FFFFFF" fontName="Courier New" fontStyle="1" fontSize="11" />
+            <WordsStyle name="DELIMINER1" styleID="14" fgColor="008000" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="DELIMINER2" styleID="15" fgColor="008000" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="DELIMINER3" styleID="16" fgColor="008000" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="BACKGROUND" styleID="32" fgColor="000000" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+            <WordsStyle name="WHITESPACE" styleID="0" fgColor="000000" bgColor="FFFFFF" fontName="Courier New" fontStyle="0" fontSize="11" />
+        </Styles>
+    </UserLang>
+</NotepadPlus>

@@ -1,0 +1,12 @@
+
+    exec execVM spawn call
+    exit exitWith
+    private
+    if then else
+    while foreach for from to do step
+    switch case default
+    try catch throw
+    and or not
+    this _this _x
+    false true nil pi
+    with

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE hrc PUBLIC "-//Cail Lomecb//DTD Colorer HRC take5//EN"
+    "http://colorer.sf.net/2003/hrc.dtd">
+
+<hrc version="take5" xmlns="http://colorer.sf.net/2003/hrc"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hrc.xsd">
+
+  <type name="sqf">
+    <annotation>
+      <documentation>
+            SQF arma scripting syntax description
+      </documentation>
+      <contributors>
+            Denis Usenko (DenVdmj@gmail.com)
+      </contributors>
+    </annotation>
+
+    <import type="def"/>
+
+    <region name="Operations" parent="def:Keyword"/>
+    <region name="Keyword"    parent="def:Keyword"/>
+    <region name="Constants"  parent="def:Constant"/>
+    <region name="Functions"  parent="def:Directive"/>
+    <region name="Commands"   parent="def:Directive"/>
+    <region name="Symb"       parent="def:Symbol"/>
+    <region name="StructOp"   parent="def:SymbolStrong"/>
+    <region name="String"     parent="def:String"/>
+    <region name="Comment"    parent="def:Comment"/>
+    <region name="PairStart"  parent="def:PairStart"/>
+    <region name="PairEnd"    parent="def:PairEnd"/>
+    <region name="Error"      parent="def:Error"/>
+    <region name="Number"     parent="def:Number"/>
+    <region name="Var"        parent="def:VarStrong"/>
+    <region name="StringEscape" parent="def:StringContent"/>
+    <scheme name="StringContentUQ">
+      <regexp match="/\x27\x27/" region="StringEscape"/>
+    </scheme>
+
+    <scheme name="StringUQ">
+      <block start="/(?{String}\x27)/" end="/(?{String}\x27)/"
+             scheme="StringContentUQ" inner-region="yes"
+             region="String" region00='PairStart' region10='PairEnd'
+      />
+    </scheme>
+
+    <scheme name="StringContent">
+      <regexp match="/\x22\x22/" region="StringEscape"/>
+    </scheme>
+    <scheme name="String">
+      <block start="/(?{String}\x22)/" end="/(?{String}\x22)/"
+             scheme="StringContent" inner-region="yes"
+             region="String" region00='PairStart' region10='PairEnd'
+      />
+    </scheme>
+
+    <scheme name="sqf">
+      <regexp match='/\/\/.*?$/' region0="Comment"/>
+      <regexp match='/comment\s*\".*?\"/' region0="Comment"/>
+      <regexp match='/(^\~\d*(\.\d+)*)/'  region0="Directive"/>
+
+      <regexp match='/\bfunc\((\w+)\)/' region0="Keyword" region1="Constant" />
+      <regexp match='/\binvoke\((\w+)\)/' region0="Keyword" region1="Constant" />
+      <regexp match='/\bvar\((\w+)\)/' region0="Keyword" region1="Constant" />
+      <inherit scheme="String"/>
+      <inherit scheme="StringUQ"/>
+      <inherit scheme="def:Number"/>
+
+      <!--regexp match='/(#(include|define|undef|ifdef|ifndef|else|endif).*?)$/' region0="Directive"/-->
+      <regexp match='/(#(include|ifdef|ifndef|else|endif).*?)$/' region0="Directive"/>
+      <regexp match='/(^\s*\#define)\s+[\w\_]+(\(.*?\))?/' region0="Directive" region1="Directive"/>
+      <regexp match='/(^\s*\#undef)\s+.*?$/' region0="Directive" region1="Directive"/>
+      <regexp match='/\b(__(?:LINE|FILE)__)\b/' region0="Directive"/>
+      <regexp match='/(\\)/' region0="Comment"/>
+
+      <regexp match='/((?:[\=\x3E\x3C\!]\=?)|[\?\,\!\=]|(?:&amp;&amp;|\|\|))/' region0="Keyword"/>
+
+      <block start="/(\{)/" end="/(\})/" scheme="sqf"
+        region00="StructOp" region01="PairStart"
+        region10="StructOp" region11="PairEnd"
+      />
+      <block start="/(\()/" end="/(\))/" scheme="sqf"
+        region00="Symb" region01="PairStart"
+        region10="Symb" region11="PairEnd"
+      />
+      <block start="/(\[)/" end="/(\])/" scheme="sqf"
+        region00="Symb" region01="PairStart"
+        region10="Symb" region11="PairEnd"
+      />
+      <block start="/(\/\*sqf\*\/&quot;)/" end="/(&quot;)/" scheme="sqf"
+        region00="StructOp" region01="PairStart"
+        region10="StructOp" region11="PairEnd"
+      />
+      <block start="/(\/\*)/" end="/(\*\/)/" scheme="Comment"
+        region="Comment" region00="Comment" region10="Comment" region01="PairStart" region11="PairEnd"
+      />
+      <keywords region="StructOp">
+        <symb name=";"/>
+      </keywords>
+
+      <keywords region="Commands" ignorecase="yes">
+        <!-- commands insert here -->
+      </keywords>
+
+      <keywords region="Keyword" ignorecase="yes">
+        <!-- keywords insert here -->
+      </keywords>
+
+      <regexp match='/\b(__\w+)\b/' region0="Constant" />
+      <regexp match='/\b(_\w+)\b/' region0="Var" />
+
+    </scheme>
+  </type>
+</hrc>
