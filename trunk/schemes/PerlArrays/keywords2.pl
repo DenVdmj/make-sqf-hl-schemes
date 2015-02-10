@@ -285,6 +285,7 @@ qw(
     __uiSet
     __writeTop
     __xor
+    _forEachIndex
     _this
     _x
     and

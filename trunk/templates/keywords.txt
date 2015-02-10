@@ -7,9 +7,9 @@
     switch case default
     try catch throw
     and or not
-    this _this _x
+    this _this _x _forEachIndex
     false true nil pi
- 
+
     __common_macro_present
     __project_name
     __module_name

@@ -6,19 +6,22 @@
 --                                                                    --
 ------------------------------------------------------------------------
 
-local io = require("io")
-local lfs = require("lfs")
-local http = require("socket.http")
-local ltn12 = require("ltn12")
+local io = require'io'
+local lfs = require'lfs'
+-- local http = require'socket.http'
+local http = require'ssl.https'
+local ltn12 = require'ltn12'
 
 require('3p/dump')
+
 
 function main()
 
     local rule = getKeywords(
         --'http://community.bistudio.com/wiki/Category:Scripting_Commands_ArmA2',
-        'http://community.bistudio.com/wiki/Category:Scripting_Commands_Arma_3',
-        --'cache/http_community.bistudio.com_wiki_Category_Scripting_Commands_ArmA2',
+        --'http://community.bistudio.com/wiki/Category:Scripting_Commands_Arma_3',
+        --'cache/http_community.bistudio.com_wiki_Category_Scripting_Commands_ArmA_3',
+        'https://community.bistudio.com/wiki/Category:Scripting_Commands_Arma_3',
         'templates/keywords.txt'
     )
 
@@ -107,17 +110,20 @@ function httpCachedGet(url)
         headers["If-Modified-Since"] = lastModified
     end
     response = httpGet { url = url, method = "GET", headers = headers }
-    --[[
+    ------------------------------------------------------------------
+    if true then
         local _response = {
             ok = response.ok,
             code = response.code,
             headers = response.headers,
             status = response.status
         }
-        print( dumpAsHTML(_response, 'm3', '/white') )
-    ]]
-    if response.code == 304 then
-        print("response.code == 304")
+        putFileContents('dump.response.html', dumpAsHTML(_response, 'm3', '/white') )
+    end
+    ------------------------------------------------------------------
+
+    if response.code ~= 200 then
+        print("response.code == " .. response.code)
         return getFileContents('./cache/'..cacheFileName)
     end
     putFileContents('./cache/'..cacheFileName, response.content, "b")
@@ -237,7 +243,7 @@ function getKeywords(commandsFileNameOrURL, keywordsFileName)
     end
     -- get and build command
     local commandsText
-    if commandsFileNameOrURL:find("^http://") then
+    if commandsFileNameOrURL:find("^https?://") then
         commandsText = httpCachedGet(commandsFileNameOrURL)
     else
         commandsText = getFileContents(commandsFileNameOrURL)
@@ -353,6 +359,5 @@ function makeScheme(template, rule)
 
     return true
 end
-
 
 main()

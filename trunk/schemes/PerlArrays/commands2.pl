@@ -3,6 +3,8 @@ qw(
     AISFinishHeal
     ASLToATL
     ATLToASL
+    HUDMovementLevels
+    UAVControl
     WFSideText
     abs
     accTime
@@ -15,11 +17,18 @@ qw(
     actionName
     activateAddons
     activateKey
+    activatedAddons
     addAction
     addBackpack
     addBackpackCargo
     addBackpackCargoGlobal
+    addBackpackGlobal
     addCamShake
+    addCuratorAddons
+    addCuratorCameraArea
+    addCuratorEditableObjects
+    addCuratorEditingArea
+    addCuratorPoints
     addEditorObject
     addEventHandler
     addGoggles
@@ -29,9 +38,14 @@ qw(
     addItem
     addItemCargo
     addItemCargoGlobal
+    addItemPool
+    addItemToBackpack
+    addItemToUniform
+    addItemToVest
     addLiveStats
     addMPEventHandler
     addMagazine
+    addMagazineAmmoCargo
     addMagazineCargo
     addMagazineCargoGlobal
     addMagazineGlobal
@@ -47,9 +61,11 @@ qw(
     addRating
     addResources
     addScore
+    addScoreSide
     addSecondaryWeaponItem
     addSwitchableUnit
     addTeamMember
+    addToRemainsCollector
     addUniform
     addVehicle
     addVest
@@ -59,22 +75,31 @@ qw(
     addWeaponCargoGlobal
     addWeaponGlobal
     addWeaponPool
+    addWeaponTurret
     agent
     agents
     aimPos
     aimedAtTarget
+    airDensityRTD
     airportSide
     alive
+    allControls
+    allCurators
     allDead
     allDeadMen
+    allDisplays
     allGroups
     allMapMarkers
+    allMines
     allMissionObjects
     allSites
+    allTurrets
     allUnits
-    allUnitsUav
+    allUnitsUAV
+    allVariables
     allow3DMode
     allowCrewInImmobile
+    allowCuratorLogicIgnoreAreas
     allowDamage
     allowDammage
     allowFileOperations
@@ -94,6 +119,7 @@ qw(
     assignAsDriver
     assignAsGunner
     assignAsTurret
+    assignCurator
     assignItem
     assignTeam
     assignToAirport
@@ -112,19 +138,25 @@ qw(
     attachObject
     attachTo
     attachedObject
+    attachedObjects
+    attachedTo
     attackEnabled
     backpack
     backpackCargo
+    backpackContainer
     backpackItems
+    backpackMagazines
     backpackSpaceFor
     behaviour
     benchmark
+    binocular
     blufor
     boundingBox
     boundingBoxReal
     boundingCenter
     breakOut
     breakTo
+    briefingName
     buildingExit
     buildingPos
     buttonAction
@@ -167,13 +199,19 @@ qw(
     cameraView
     campaignConfigFile
     canAdd
+    canAddItemToBackpack
+    canAddItemToUniform
+    canAddItemToVest
     canFire
     canMove
+    canSlingLoad
     canStand
     canUnloadInCombat
     cancelSimpleTaskDestination
     captive
     captiveNum
+    cbChecked
+    cbSetChecked
     ceil
     cheatsEnabled
     checkAIFeature
@@ -185,6 +223,7 @@ qw(
     clearGroupIcons
     clearItemCargo
     clearItemCargoGlobal
+    clearItemPool
     clearMagazineCargo
     clearMagazineCargoGlobal
     clearMagazinePool
@@ -217,9 +256,11 @@ qw(
     compileFinal
     completedFSM
     composeText
+    configClasses
     configFile
     configName
-    connectTerminalToUav
+    configProperties
+    connectTerminalToUAV
     controlNull
     copyFromClipboard
     copyToClipboard
@@ -264,8 +305,11 @@ qw(
     ctrlAutoScrollRewind
     ctrlAutoScrollSpeed
     ctrlChecked
+    ctrlClassName
     ctrlCommit
     ctrlCommitted
+    ctrlCreate
+    ctrlDelete
     ctrlEnable
     ctrlEnabled
     ctrlFade
@@ -281,6 +325,9 @@ qw(
     ctrlMapScale
     ctrlMapScreenToWorld
     ctrlMapWorldToScreen
+    ctrlModel
+    ctrlModelDirAndUp
+    ctrlModelScale
     ctrlParent
     ctrlPosition
     ctrlRemoveAllEventHandlers
@@ -318,6 +365,9 @@ qw(
     ctrlSetFontP
     ctrlSetFontPB
     ctrlSetForegroundColor
+    ctrlSetModel
+    ctrlSetModelDirAndUp
+    ctrlSetModelScale
     ctrlSetPosition
     ctrlSetScale
     ctrlSetStructuredText
@@ -333,9 +383,24 @@ qw(
     ctrlTextHeight
     ctrlType
     ctrlVisible
+    curatorAddons
+    curatorCamera
+    curatorCameraArea
+    curatorCameraAreaCeiling
+    curatorCoef
+    curatorEditableObjects
+    curatorEditingArea
+    curatorEditingAreaType
+    curatorMouseOver
+    curatorPoints
+    curatorRegisteredObjects
+    curatorSelected
+    curatorWaypointCost
     currentCommand
     currentMagazine
     currentMagazineDetail
+    currentMagazineDetailTurret
+    currentMagazineTurret
     currentMuzzle
     currentTask
     currentTasks
@@ -343,6 +408,7 @@ qw(
     currentWaypoint
     currentWeapon
     currentWeaponMode
+    currentWeaponTurret
     currentZeroing
     cursorTarget
     customChat
@@ -360,6 +426,7 @@ qw(
     debugFSM
     debugLog
     deg
+    deleteAt
     deleteCenter
     deleteCollection
     deleteEditorObject
@@ -368,13 +435,16 @@ qw(
     deleteLocation
     deleteMarker
     deleteMarkerLocal
+    deleteRange
     deleteResources
     deleteSite
     deleteStatus
     deleteTeam
     deleteVehicle
+    deleteVehicleCrew
     deleteWaypoint
     detach
+    detectedMines
     diag_captureFrame
     diag_captureSlowFrame
     diag_fps
@@ -387,13 +457,16 @@ qw(
     diarySubjectExists
     difficulty
     difficultyEnabled
+    difficultyEnabledRTD
     directSay
     direction
     disableAI
     disableCollisionWith
     disableConversation
+    disableDebriefingStats
     disableSerialization
     disableTIEquipment
+    disableUAVConnectability
     disableUserInput
     displayAddEventHandler
     displayCtrl
@@ -439,25 +512,38 @@ qw(
     enableCaustics
     enableCollisionWith
     enableCopilot
+    enableDebriefingStats
+    enableDiagLegend
     enableEndDialog
     enableEngineArtillery
     enableEnvironment
     enableFatigue
     enableGunLights
     enableIRLasers
+    enableMimics
+    enablePersonTurret
     enableRadio
     enableReload
+    enableRopeAttach
+    enableSatNormalOnDetail
     enableSaving
     enableSentences
     enableSimulation
+    enableSimulationGlobal
     enableTeamSwitch
+    enableUAVConnectability
     endLoadingScreen
     endMission
     engineOn
+    enginesIsOnRTD
+    enginesRpmRTD
+    enginesTorqueRTD
     entities
     estimatedEndServerTime
     estimatedTimeLeft
     evalObjectArgument
+    everyBackpack
+    everyContainer
     execEditorScript
     execFSM
     exp
@@ -495,11 +581,14 @@ qw(
     forEachMember
     forEachMemberAgent
     forEachMemberTeam
+    forceAddUniform
     forceEnd
     forceMap
+    forceRespawn
     forceSpeed
     forceWalk
     forceWeaponFire
+    forceWeatherChange
     formLeader
     format
     formatText
@@ -512,19 +601,29 @@ qw(
     freeLook
     fromEditor
     fuel
+    fullCrew
+    gearSlotAmmoCount
     gearSlotData
     getAmmoCargo
     getArray
     getArtilleryAmmo
     getArtilleryComputerSettings
     getArtilleryETA
+    getAssignedCuratorLogic
+    getAssignedCuratorUnit
     getBackpackCargo
     getBleedingRemaining
     getBurningValue
-    getConnectedUav
+    getCargoIndex
+    getCenterOfMass
+    getChosenCont
+    getClientState
+    getConnectedUAV
+    getDLCs
     getDammage
     getDescription
     getDir
+    getDirVisual
     getEditorCamera
     getEditorMode
     getEditorObjectScope
@@ -537,6 +636,7 @@ qw(
     getGroupIconParams
     getGroupIcons
     getHideFrom
+    getHit
     getHitPointDamage
     getItemCargo
     getMagazineCargo
@@ -544,18 +644,29 @@ qw(
     getMarkerPos
     getMarkerSize
     getMarkerType
+    getMass
     getNumber
     getObjectArgument
     getObjectChildren
+    getObjectDLC
+    getObjectMaterials
     getObjectProxy
+    getObjectTextures
     getOxygenRemaining
+    getPersonUsedDLCs
     getPlayerUID
     getPos
     getPosASL
+    getPosASLVisual
     getPosASLW
     getPosATL
+    getPosATLVisual
+    getPosVisual
+    getPosWorld
     getRepairCargo
     getResolution
+    getShadowDistance
+    getSlingLoad
     getSpeed
     getTerrainHeightASL
     getText
@@ -599,10 +710,12 @@ qw(
     headgear
     hideBody
     hideObject
+    hideObjectGlobal
     hint
     hintC
     hintCadet
     hintSilent
+    hmd
     hostMission
     htmlLoad
     humidity
@@ -612,6 +725,7 @@ qw(
     in
     inGameUISetEventHandler
     inRangeOfArtillery
+    incapacitatedState
     independent
     inflame
     inflamed
@@ -624,20 +738,28 @@ qw(
     isAgent
     isArray
     isAutoHoverOn
+    isAutonomous
+    isAutotest
     isBleeding
     isBurning
     isClass
+    isCollisionLightOn
     isCopilotEnabled
+    isDLCAvailable
     isDedicated
     isEngineOn
+    isEqualTo
     isFlashlightOn
     isFlatEmpty
     isForcedWalk
     isFormationLeader
     isHidden
     isIRLaserOn
+    isInRemainsCollector
+    isInstructorFigureEnabled
     isKeyActive
     isKindOf
+    isLightOn
     isLocalized
     isManualFire
     isMarkedForCollection
@@ -645,6 +767,7 @@ qw(
     isNil
     isNull
     isNumber
+    isObjectRTD
     isOnRoad
     isPipEnabled
     isPlayer
@@ -656,10 +779,13 @@ qw(
     isText
     isTouchingGround
     isTutHintsEnabled
-    isUavConnected
+    isUAVConnectable
+    isUAVConnected
+    isUniformAllowed
     isWalking
     itemCargo
     items
+    itemsWithMagazines
     join
     joinAs
     joinAsSilent
@@ -693,6 +819,9 @@ qw(
     lbSetCurSel
     lbSetData
     lbSetPicture
+    lbSetPictureColor
+    lbSetPictureColorDisabled
+    lbSetPictureColorSelected
     lbSetSelected
     lbSetTooltip
     lbSetValue
@@ -713,6 +842,7 @@ qw(
     limitSpeed
     lineBreak
     lineIntersects
+    lineIntersectsObjs
     lineIntersectsWith
     linearConversion
     linkItem
@@ -731,6 +861,7 @@ qw(
     lnbGetColumnsPosition
     lnbPicture
     lnbSetColor
+    lnbSetColumnsPos
     lnbSetCurSelRow
     lnbSetData
     lnbSetPicture
@@ -739,7 +870,6 @@ qw(
     lnbSize
     lnbText
     lnbValue
-    lnbsetColumnsPos
     load
     loadAbs
     loadBackpack
@@ -756,22 +886,29 @@ qw(
     locationNull
     locationPosition
     lock
+    lockCameraTo
     lockCargo
     lockDriver
     lockTurret
-    lockWp
+    lockWP
     locked
     lockedCargo
     lockedDriver
     lockedTurret
     log
+    logEntities
     lookAt
     lookAtPos
     magazineCargo
+    magazineTurretAmmo
     magazines
     magazinesAmmo
+    magazinesAmmoCargo
     magazinesAmmoFull
     magazinesDetail
+    magazinesDetailBackpack
+    magazinesDetailUniform
+    magazinesDetailVest
     magazinesTurret
     mapAnimAdd
     mapAnimClear
@@ -793,15 +930,18 @@ qw(
     members
     min
     mineActive
+    mineDetectedBy
     missionConfigFile
     missionName
     missionNamespace
     missionStart
     mod
     modelToWorld
+    modelToWorldVisual
     moonIntensity
     morale
     move
+    moveInAny
     moveInCargo
     moveInCommander
     moveInDriver
@@ -831,12 +971,14 @@ qw(
     nearestObjects
     needReload
     netId
+    netObjNull
     newOverlay
     nextMenuItemIndex
     nextWeatherChange
     numberToDate
     objNull
     objStatus
+    objectCurators
     objectFromNetId
     onBriefingGroup
     onBriefingNotes
@@ -856,7 +998,9 @@ qw(
     onPreloadStarted
     onShowNewObject
     onTeamSwitch
+    openCuratorInterface
     openMap
+    openYoutubeVideo
     opfor
     orderGetIn
     overcast
@@ -878,6 +1022,7 @@ qw(
     playScriptedMission
     playSound
     playSound3D
+    playableSlotsNumber
     playableUnits
     player
     playerRespawnTime
@@ -916,7 +1061,9 @@ qw(
     publicVariable
     publicVariableClient
     publicVariableServer
+    pushBack
     putWeaponPool
+    queryItemsPool
     queryMagazinePool
     queryWeaponPool
     rad
@@ -942,23 +1089,36 @@ qw(
     removeAllActions
     removeAllAssignedItems
     removeAllContainers
+    removeAllCuratorAddons
+    removeAllCuratorCameraAreas
+    removeAllCuratorEditingAreas
     removeAllEventHandlers
     removeAllHandgunItems
     removeAllItems
+    removeAllItemsWithMagazines
     removeAllMPEventHandlers
     removeAllMissionEventHandlers
     removeAllMusicEventHandlers
     removeAllPrimaryWeaponItems
     removeAllWeapons
     removeBackpack
+    removeBackpackGlobal
+    removeCuratorAddons
+    removeCuratorCameraArea
+    removeCuratorEditableObjects
+    removeCuratorEditingArea
     removeDrawIcon
     removeDrawLinks
     removeEventHandler
+    removeFromRemainsCollector
     removeGoggles
     removeGroupIcon
     removeHandgunItem
     removeHeadgear
     removeItem
+    removeItemFromBackpack
+    removeItemFromUniform
+    removeItemFromVest
     removeItems
     removeMPEventHandler
     removeMagazine
@@ -970,6 +1130,7 @@ qw(
     removeMissionEventHandler
     removeMusicEventHandler
     removePrimaryWeaponItem
+    removeSecondaryWeaponItem
     removeSimpleTask
     removeSwitchableUnit
     removeTeamMember
@@ -977,6 +1138,7 @@ qw(
     removeVest
     removeWeapon
     removeWeaponGlobal
+    removeWeaponTurret
     requiredVersion
     resetCamShake
     resetSubgroupDirection
@@ -987,8 +1149,22 @@ qw(
     restartEditorCamera
     reveal
     revealMine
+    reverse
     reversedMouseY
     roadsConnectedTo
+    ropeAttachEnabled
+    ropeAttachTo
+    ropeAttachedObjects
+    ropeAttachedTo
+    ropeCreate
+    ropeCut
+    ropeEndPosition
+    ropeLength
+    ropeUnwind
+    ropeUnwound
+    ropes
+    rotorsForcesRTD
+    rotorsRpmRTD
     round
     runInitScript
     safeZoneH
@@ -1014,6 +1190,7 @@ qw(
     screenToWorld
     scriptDone
     scriptName
+    scriptNull
     scudState
     secondaryWeapon
     secondaryWeaponItems
@@ -1026,6 +1203,7 @@ qw(
     selectNoPlayer
     selectPlayer
     selectWeapon
+    selectWeaponTurret
     selectedEditorObjects
     selectionPosition
     sendAUMessage
@@ -1035,6 +1213,7 @@ qw(
     sendUDPMessage
     serverCommand
     serverCommandAvailable
+    serverCommandExecutable
     serverTime
     set
     setAccTime
@@ -1045,6 +1224,7 @@ qw(
     setApertureNew
     setArmoryPoints
     setAttributes
+    setAutonomous
     setBehaviour
     setBleedingRemaining
     setCamShakeDefParams
@@ -1052,14 +1232,21 @@ qw(
     setCamUseTi
     setCameraInterest
     setCaptive
+    setCenterOfMass
+    setCollisionLight
     setCombatMode
     setCompassOscillation
+    setCuratorCameraAreaCeiling
+    setCuratorCoef
+    setCuratorEditingAreaType
+    setCuratorWaypointCost
     setCurrentTask
     setCurrentWaypoint
     setDamage
     setDammage
     setDate
     setDebriefingText
+    setDefaultCamera
     setDestination
     setDir
     setDirection
@@ -1108,6 +1295,7 @@ qw(
     setLightUseFlare
     setLightnings
     setLocalWindParams
+    setMagazineTurretAmmo
     setMarkerAlpha
     setMarkerAlphaLocal
     setMarkerBrush
@@ -1126,24 +1314,29 @@ qw(
     setMarkerTextLocal
     setMarkerType
     setMarkerTypeLocal
+    setMass
     setMimic
     setMousePosition
     setMusicEffect
+    setMusicEventHandler
     setName
     setNameSound
     setObjectArguments
     setObjectMaterial
     setObjectProxy
     setObjectTexture
+    setObjectTextureGlobal
     setObjectViewDistance
     setOvercast
     setOwner
     setOxygenRemaining
     setParticleCircle
     setParticleClass
+    setParticleFire
     setParticleParams
     setParticleRandom
     setPiPEffect
+    setPilotLight
     setPitch
     setPlayable
     setPlayerRespawnTime
@@ -1152,6 +1345,7 @@ qw(
     setPosASL2
     setPosASLW
     setPosATL
+    setPosWorld
     setPosition
     setRadioMsg
     setRain
@@ -1168,15 +1362,19 @@ qw(
     setSimulWeatherLayers
     setSize
     setSkill
+    setSlingLoad
     setSoundEffect
     setSpeaker
+    setSpeech
     setSpeedMode
+    setStatValue
     setSystemOfUnits
     setTargetAge
     setTaskResult
     setTaskState
     setTerrainGrid
     setText
+    setTimeMultiplier
     setTitleEffect
     setTriggerActivation
     setTriggerArea
@@ -1191,6 +1389,7 @@ qw(
     setUnitPosWeak
     setUnitRank
     setUnitRecoilCoefficient
+    setUnloadInCombat
     setUserActionText
     setVariable
     setVectorDir
@@ -1216,6 +1415,8 @@ qw(
     setWaypointDescription
     setWaypointFormation
     setWaypointHousePosition
+    setWaypointLoiterRadius
+    setWaypointLoiterType
     setWaypointName
     setWaypointPosition
     setWaypointScript
@@ -1234,6 +1435,7 @@ qw(
     showCinemaBorder
     showCommandingMenu
     showCompass
+    showCuratorCompass
     showGPS
     showHUD
     showLegend
@@ -1242,15 +1444,19 @@ qw(
     showPad
     showRadio
     showSubtitles
+    showUAVFeed
     showWarrant
     showWatch
     showWaypoint
     shownArtilleryComputer
+    shownChat
     shownCompass
+    shownCuratorCompass
     shownGPS
     shownMap
     shownPad
     shownRadio
+    shownUAVFeed
     shownWarrant
     shownWatch
     side
@@ -1270,6 +1476,7 @@ qw(
     size
     sizeOf
     skill
+    skillFinal
     skipTime
     sleep
     sliderPosition
@@ -1278,12 +1485,15 @@ qw(
     sliderSetRange
     sliderSetSpeed
     sliderSpeed
+    slingLoadAssistantShown
+    soldierMagazines
     someAmmo
     soundVolume
     speaker
     speed
     speedMode
     sqrt
+    squadParams
     stance
     startLoadingScreen
     stop
@@ -1338,6 +1548,7 @@ qw(
     textLogFormat
     tg
     time
+    timeMultiplier
     titleCut
     titleFadeOut
     titleObj
@@ -1356,14 +1567,19 @@ qw(
     triggerStatements
     triggerText
     triggerTimeout
+    triggerTimeoutCurrent
     triggerType
+    turretLocal
+    turretOwner
     turretUnit
     tvAdd
     tvClear
+    tvCollapse
     tvCount
     tvCurSel
     tvData
     tvDelete
+    tvExpand
     tvPicture
     tvSetCurSel
     tvSetData
@@ -1376,15 +1592,17 @@ qw(
     type
     typeName
     typeOf
-    uavControl
     uiNamespace
     uiSleep
+    unassignCurator
     unassignItem
     unassignTeam
     unassignVehicle
     underwater
     uniform
+    uniformContainer
     uniformItems
+    uniformMagazines
     unitAddons
     unitBackpack
     unitPos
@@ -1399,8 +1617,22 @@ qw(
     updateMenuItem
     updateObjectTree
     useAudioTimeForMoves
+    vectorAdd
+    vectorCos
+    vectorCrossProduct
+    vectorDiff
     vectorDir
+    vectorDirVisual
+    vectorDistance
+    vectorDistanceSqr
+    vectorDotProduct
+    vectorFromTo
+    vectorMagnitude
+    vectorMagnitudeSqr
+    vectorMultiply
+    vectorNormalized
     vectorUp
+    vectorUpVisual
     vehicle
     vehicleChat
     vehicleRadio
@@ -1410,11 +1642,16 @@ qw(
     velocityModelSpace
     verifySignature
     vest
+    vestContainer
     vestItems
+    vestMagazines
     viewDistance
+    visibleCompass
+    visibleGPS
     visibleMap
     visiblePosition
     visiblePositionASL
+    visibleWatch
     waitUntil
     waves
     waypointAttachObject
@@ -1427,6 +1664,8 @@ qw(
     waypointDescription
     waypointFormation
     waypointHousePosition
+    waypointLoiterRadius
+    waypointLoiterType
     waypointName
     waypointPosition
     waypointScript
@@ -1434,6 +1673,7 @@ qw(
     waypointSpeed
     waypointStatements
     waypointTimeout
+    waypointTimeoutCurrent
     waypointType
     waypointVisible
     waypoints
@@ -1444,12 +1684,15 @@ qw(
     weaponState
     weapons
     weaponsItems
+    weaponsItemsCargo
     weaponsTurret
+    weightRTD
     west
     wind
     windDir
     windStr
     worldName
     worldToModel
+    worldToModelVisual
     worldToScreen
 );
