@@ -209,6 +209,7 @@
         <word name="animateDoor"/>
         <word name="animationPhase"/>
         <word name="animationState"/>
+        <word name="append"/>
         <word name="armoryPoints"/>
         <word name="asin"/>
         <word name="assert"/>
@@ -359,8 +360,11 @@
         <word name="configFile"/>
         <word name="configName"/>
         <word name="configProperties"/>
+        <word name="configSourceMod"/>
+        <word name="configSourceModList"/>
         <word name="connectTerminalToUAV"/>
         <word name="controlNull"/>
+        <word name="controlsGroupCtrl"/>
         <word name="copyFromClipboard"/>
         <word name="copyToClipboard"/>
         <word name="copyWaypoints"/>
@@ -544,6 +548,7 @@
         <word name="deleteWaypoint"/>
         <word name="detach"/>
         <word name="detectedMines"/>
+        <word name="diag_activeSQFScripts"/>
         <word name="diag_captureFrame"/>
         <word name="diag_captureSlowFrame"/>
         <word name="diag_fps"/>
@@ -631,6 +636,7 @@
         <word name="enableSimulationGlobal"/>
         <word name="enableTeamSwitch"/>
         <word name="enableUAVConnectability"/>
+        <word name="enableUAVWaypoints"/>
         <word name="endLoadingScreen"/>
         <word name="endMission"/>
         <word name="engineOn"/>
@@ -715,7 +721,6 @@
         <word name="getBurningValue"/>
         <word name="getCargoIndex"/>
         <word name="getCenterOfMass"/>
-        <word name="getChosenCont"/>
         <word name="getClientState"/>
         <word name="getConnectedUAV"/>
         <word name="getDLCs"/>
@@ -767,6 +772,7 @@
         <word name="getShadowDistance"/>
         <word name="getSlingLoad"/>
         <word name="getSpeed"/>
+        <word name="getSuppression"/>
         <word name="getTerrainHeightASL"/>
         <word name="getText"/>
         <word name="getVariable"/>
@@ -780,9 +786,10 @@
         <word name="group"/>
         <word name="groupChat"/>
         <word name="groupFromNetId"/>
-        <word name="groupID"/>
         <word name="groupIconSelectable"/>
         <word name="groupIconsVisible"/>
+        <word name="groupId"/>
+        <word name="groupOwner"/>
         <word name="groupRadio"/>
         <word name="groupSelectUnit"/>
         <word name="groupSelectedUnits"/>
@@ -882,6 +889,8 @@
         <word name="isUAVConnected"/>
         <word name="isUniformAllowed"/>
         <word name="isWalking"/>
+        <word name="isWeaponDeployed"/>
+        <word name="isWeaponRested"/>
         <word name="itemCargo"/>
         <word name="items"/>
         <word name="itemsWithMagazines"/>
@@ -930,6 +939,9 @@
         <word name="lbText"/>
         <word name="lbValue"/>
         <word name="leader"/>
+        <word name="leaderboardDeInit"/>
+        <word name="leaderboardGetRows"/>
+        <word name="leaderboardInit"/>
         <word name="leaveVehicle"/>
         <word name="libraryCredits"/>
         <word name="libraryDisclaimers"/>
@@ -1374,6 +1386,7 @@
         <word name="setGroupIconsSelectable"/>
         <word name="setGroupIconsVisible"/>
         <word name="setGroupId"/>
+        <word name="setGroupOwner"/>
         <word name="setGusts"/>
         <word name="setHUDMovementLevels"/>
         <word name="setHideBehind"/>
@@ -1467,6 +1480,7 @@
         <word name="setSpeech"/>
         <word name="setSpeedMode"/>
         <word name="setStatValue"/>
+        <word name="setSuppression"/>
         <word name="setSystemOfUnits"/>
         <word name="setTargetAge"/>
         <word name="setTaskResult"/>
@@ -1587,6 +1601,7 @@
         <word name="slingLoadAssistantShown"/>
         <word name="soldierMagazines"/>
         <word name="someAmmo"/>
+        <word name="sort"/>
         <word name="soundVolume"/>
         <word name="speaker"/>
         <word name="speed"/>
@@ -1776,6 +1791,7 @@
         <word name="waypointType"/>
         <word name="waypointVisible"/>
         <word name="waypoints"/>
+        <word name="waypointsEnabledUAV"/>
         <word name="weaponAccessories"/>
         <word name="weaponCargo"/>
         <word name="weaponDirection"/>
@@ -1790,6 +1806,7 @@
         <word name="wind"/>
         <word name="windDir"/>
         <word name="windStr"/>
+        <word name="wingsForcesRTD"/>
         <word name="worldName"/>
         <word name="worldToModel"/>
         <word name="worldToModelVisual"/>

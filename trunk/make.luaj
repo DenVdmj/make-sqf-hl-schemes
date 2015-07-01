@@ -86,7 +86,7 @@ function httpGet(request)
     }
 end
 
-function getFileContents(filename, binary)
+function readfile(filename, binary)
     local fileHNDL = io.open(filename, "r"..(binary and "b" or ""))
     if not fileHNDL then return "" end
     local buffer = fileHNDL:read("*a")
@@ -94,7 +94,7 @@ function getFileContents(filename, binary)
     return buffer
 end
 
-function putFileContents(filename, contents, binary)
+function writefile(filename, contents, binary)
     local fileHNDL = io.open(filename, "w"..(binary and "b+" or "+"))
     if not fileHNDL then return false end
     fileHNDL:write(contents)
@@ -104,7 +104,7 @@ end
 
 function httpCachedGet(url)
     local cacheFileName = escapeFileName(url)
-    local lastModified = getFileContents('./cache/'..cacheFileName..'.{lm}')
+    local lastModified = readfile('./cache/'..cacheFileName..'.{lm}')
     local headers = getBrowserHeaders()
     if (lastModified) then
         headers["If-Modified-Since"] = lastModified
@@ -118,16 +118,16 @@ function httpCachedGet(url)
             headers = response.headers,
             status = response.status
         }
-        putFileContents('dump.response.html', dumpAsHTML(_response, 'm3', '/white') )
+        writefile('dump.response.html', dumpAsHTML(_response, 'm3', '/white') )
     end
     ------------------------------------------------------------------
 
     if response.code ~= 200 then
         print("response.code == " .. response.code)
-        return getFileContents('./cache/'..cacheFileName)
+        return readfile('./cache/'..cacheFileName)
     end
-    putFileContents('./cache/'..cacheFileName, response.content, "b")
-    putFileContents('./cache/'..cacheFileName..'.{lm}', response.headers["last-modified"], "b")
+    writefile('./cache/'..cacheFileName, response.content, "b")
+    writefile('./cache/'..cacheFileName..'.{lm}', response.headers["last-modified"], "b")
     return response.content
 end
 
@@ -140,17 +140,23 @@ function lfs.mkpath(path)
 end
 
 function getTemplates()
+
+    local function loadTemplate (filename)
+        local handle = io.open(filename, 'rb')
+        local text = handle:read('*a')
+        handle:close()
+        return loadstring('return {'..text..'}')
+    end
+
     local function getTemplate(filename)
-        local func, err = loadfile(filename)
+        local func, err = loadTemplate(filename)
         if not func then
-            -- gen error
-            print('Error in incuding module ('..filename..')\n'..err)
+            print('Error in including module ('..filename..')\n'..err)
             return nil
         end
         local isOk, template = pcall(func)
         if not isOk then
-            -- gen error
-            print('Error in incuding module '..filename)
+            print('Error of applying of incuded module '..filename)
             return nil
         end
         return template
@@ -227,7 +233,7 @@ end
 
 function getKeywords(commandsFileNameOrURL, keywordsFileName)
     -- get and build keywords
-    local keywordsText = getFileContents(keywordsFileName or "templates/keywords.txt")
+    local keywordsText = readfile(keywordsFileName or "templates/keywords.txt")
     local keywordsTable = {}
     local keywordsList = {}
 
@@ -246,7 +252,7 @@ function getKeywords(commandsFileNameOrURL, keywordsFileName)
     if commandsFileNameOrURL:find("^https?://") then
         commandsText = httpCachedGet(commandsFileNameOrURL)
     else
-        commandsText = getFileContents(commandsFileNameOrURL)
+        commandsText = readfile(commandsFileNameOrURL)
     end
     local parsed = parseBISWikiCategory(commandsText)
     local commandsList = {}
@@ -301,7 +307,7 @@ function makeScheme(template, rule)
     template = setmetatable(template, __templatemt)
 
     local templateFile = template.directory..'/'..template.template
-    local templateText = getFileContents(templateFile)
+    local templateText = readfile(templateFile)
     if not templateText then
         print('Error creating scheme: template file "'..templateFile..'" not found!')
         return false
@@ -353,7 +359,7 @@ function makeScheme(template, rule)
 
     for _, filename in pairs(template.otherfiles) do
         -- print(">>>> copy file: " .. template.directory .. '/' .. filename)
-        putFileContents(schemePath..filename, getFileContents(template.directory .. '/' .. filename, true), true)
+        writefile(schemePath..filename, readfile(template.directory .. '/' .. filename, true), true)
     end
 
 

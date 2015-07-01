@@ -110,6 +110,7 @@ qw(
     animateDoor
     animationPhase
     animationState
+    append
     armoryPoints
     asin
     assert
@@ -260,8 +261,11 @@ qw(
     configFile
     configName
     configProperties
+    configSourceMod
+    configSourceModList
     connectTerminalToUAV
     controlNull
+    controlsGroupCtrl
     copyFromClipboard
     copyToClipboard
     copyWaypoints
@@ -445,6 +449,7 @@ qw(
     deleteWaypoint
     detach
     detectedMines
+    diag_activeSQFScripts
     diag_captureFrame
     diag_captureSlowFrame
     diag_fps
@@ -532,6 +537,7 @@ qw(
     enableSimulationGlobal
     enableTeamSwitch
     enableUAVConnectability
+    enableUAVWaypoints
     endLoadingScreen
     endMission
     engineOn
@@ -616,7 +622,6 @@ qw(
     getBurningValue
     getCargoIndex
     getCenterOfMass
-    getChosenCont
     getClientState
     getConnectedUAV
     getDLCs
@@ -668,6 +673,7 @@ qw(
     getShadowDistance
     getSlingLoad
     getSpeed
+    getSuppression
     getTerrainHeightASL
     getText
     getVariable
@@ -681,9 +687,10 @@ qw(
     group
     groupChat
     groupFromNetId
-    groupID
     groupIconSelectable
     groupIconsVisible
+    groupId
+    groupOwner
     groupRadio
     groupSelectUnit
     groupSelectedUnits
@@ -783,6 +790,8 @@ qw(
     isUAVConnected
     isUniformAllowed
     isWalking
+    isWeaponDeployed
+    isWeaponRested
     itemCargo
     items
     itemsWithMagazines
@@ -831,6 +840,9 @@ qw(
     lbText
     lbValue
     leader
+    leaderboardDeInit
+    leaderboardGetRows
+    leaderboardInit
     leaveVehicle
     libraryCredits
     libraryDisclaimers
@@ -1275,6 +1287,7 @@ qw(
     setGroupIconsSelectable
     setGroupIconsVisible
     setGroupId
+    setGroupOwner
     setGusts
     setHUDMovementLevels
     setHideBehind
@@ -1368,6 +1381,7 @@ qw(
     setSpeech
     setSpeedMode
     setStatValue
+    setSuppression
     setSystemOfUnits
     setTargetAge
     setTaskResult
@@ -1488,6 +1502,7 @@ qw(
     slingLoadAssistantShown
     soldierMagazines
     someAmmo
+    sort
     soundVolume
     speaker
     speed
@@ -1677,6 +1692,7 @@ qw(
     waypointType
     waypointVisible
     waypoints
+    waypointsEnabledUAV
     weaponAccessories
     weaponCargo
     weaponDirection
@@ -1691,6 +1707,7 @@ qw(
     wind
     windDir
     windStr
+    wingsForcesRTD
     worldName
     worldToModel
     worldToModelVisual
