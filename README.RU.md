@@ -5,7 +5,7 @@
 [«Colorer»](https://ru.wikipedia.org/wiki/Colorer) ([«FAR»](http://www.farmanager.com/download.php?l=ru), [«Eclipse»](https://eclipse.org/downloads/)),
 [«SciTE»](https://bitbucket.org/scite-ru/scite-ru.bitbucket.org/wiki/Home),
 [«Notepad++»](https://notepad-plus-plus.org/),
-javascrip-хайлайтера [«highlight.js»](http://softwaremaniacs.org/soft/highlight).
+javascrip-хайлайтера [«highlight.js»](https://highlightjs.org/).
 
 Созданные схемы будут лежать в директории schemes.
 
