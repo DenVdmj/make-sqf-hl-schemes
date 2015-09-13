@@ -27,8 +27,7 @@ sub templateLine {
 
 sub escape {
     my ($text) = @_;
-    #$text =~ s/(?:\x0D\x0A)|(?:\x0A\x0D)|(?:\x0A)|(?:\x0D)/\\n/g;
-    $text =~ s/(?:\x0D\x0A?)|(?:\x0A?\x0D)/\\n/g;
+    $text =~ s/(?:\n\r?)/\\n/g;
     $text =~ s/"/\\"/g;
     $text;
 }
