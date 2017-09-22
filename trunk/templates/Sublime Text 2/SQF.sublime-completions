@@ -1,7 +1,19 @@
 {
-    "scope": "source.sqf",
+	"scope": "source.sqf",
 	"completions": [
-        /* keywords insert here */,
-        /* commands insert here */
-    ]
+		"#define",
+		"#undef",
+		"#ifdef",
+		"#ifndef",
+		"#else",
+		"#endif",
+		"#include",
+		"__EVAL",
+		"__EXEC",
+		"__FILE__",
+		"__LINE__",
+
+		/* keywords insert here */,
+		/* commands insert here */
+	]
 }

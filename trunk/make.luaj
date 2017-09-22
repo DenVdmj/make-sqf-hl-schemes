@@ -21,8 +21,10 @@ function main()
         --'http://community.bistudio.com/wiki/Category:Scripting_Commands_ArmA2',
         --'http://community.bistudio.com/wiki/Category:Scripting_Commands_Arma_3',
         --'cache/http_community.bistudio.com_wiki_Category_Scripting_Commands_ArmA_3',
+        --
         'https://community.bistudio.com/wiki/Category:Scripting_Commands_Arma_3',
-        'templates/keywords.txt'
+        'templates/keywords.txt',
+        'templates/custom-commands.txt'
     )
 
     -- buildScheme(rule)
@@ -231,9 +233,10 @@ function getDescription(url)
     return ""
 end
 
-function getKeywords(commandsFileNameOrURL, keywordsFileName)
+function getKeywords(commandsFileNameOrURL, keywordsFileName, customCommandsFileName)
     -- get and build keywords
-    local keywordsText = readfile(keywordsFileName or "templates/keywords.txt")
+    local keywordsText = (readfile(keywordsFileName or "templates/keywords.txt")):gsub(';.-\n', '\n')
+    local customCommandsText = (readfile(customCommandsFileName or "templates/custom-commands.txt")):gsub(';.-\n', '\n')
     local keywordsTable = {}
     local keywordsList = {}
 
@@ -244,9 +247,11 @@ function getKeywords(commandsFileNameOrURL, keywordsFileName)
     for keyword in keywordsText:gmatch("([%w%-%+%?%,%;%=%_]+)") do
         keywordsTable[keyword:lower()] = keyword
     end
+
     for lowerCaseKeyword, keyword in pairs(keywordsTable) do
         table.insert(keywordsList, canonozeSQFName(keyword))
     end
+
     -- get and build command
     local commandsText
     if commandsFileNameOrURL:find("^https?://") then
@@ -254,19 +259,31 @@ function getKeywords(commandsFileNameOrURL, keywordsFileName)
     else
         commandsText = readfile(commandsFileNameOrURL)
     end
+
     local parsed = parseBISWikiCategory(commandsText)
     local commandsList = {}
     local descriptionsList = {}
+
+
+    for customcommand in customCommandsText:gmatch("([%w%-%+%?%,%;%=%_]+)") do
+        if not keywordsTable[lowerCaseCommand] then
+          table.insert(commandsList, canonozeSQFName(customcommand))
+        end
+    end
+
     for lowerCaseCommand, command in pairs(parsed.commandsTable) do
         if not keywordsTable[lowerCaseCommand] then
             table.insert(commandsList, canonozeSQFName(command))
         end
     end
+
     for _, record in pairs(parsed.descriptionsTable) do
         record.desc = getDescription(record.url)
     end
+
     table.sort(keywordsList)
     table.sort(commandsList)
+
     return {
         keywords = {
             table = keywordsTable,
@@ -339,7 +356,7 @@ function makeScheme(template, rule)
         return result
     end
 
-    local paddingRegExp = template.padding and '(\n *)' or ''
+    local paddingRegExp = template.padding and '(\n[\x20\x09]*)' or ''
     local schemeText = templateText:
         gsub(paddingRegExp..escapeRegExp(template.placeholder.commands or '1c3511374f0cbfee5efce28467fb9618'),
             function (padding)

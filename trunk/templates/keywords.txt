@@ -1,4 +1,6 @@
 
+    ; base keyword
+
     exec execVM spawn call
     exit exitwith exitWith
     private
@@ -9,6 +11,9 @@
     and or not
     this _this _x _forEachIndex
     false true nil pi
+
+
+    ; macros
 
     __common_macro_present
     __project_name

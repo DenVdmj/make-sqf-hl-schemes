@@ -1,7 +1,7 @@
 
 use STD;
 
-my $basedir = 'D:/Games/ArmA2/@/$vdmj/css/css-src/trunk/css';
+my $basedir = 'D:/Games/ArmA2/@/#vdmj/css/css-src/trunk/css';
 
 my @files = qw(
     css
